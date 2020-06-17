@@ -7,7 +7,7 @@ Implement an algorithm to determine if a string has all unique characters.
 */
 public class UniqueCharactersInString{
     public static void main(String[] args) {
-        String word= "akhil";
+        String word= "abcda";
         //Method-1(Brute Force)
         System.out.println(FindIfStringIsUniqueUsingBruteForce(word));
         //Method-2(Use Hash Map)
@@ -15,14 +15,25 @@ public class UniqueCharactersInString{
         //Method-3(With no additional Data Structure Usage)
         System.out.println(FindIfStringIsUniqueUsingIntegerBits(word));
     }
-
+    //T.C =O(n) & S.C = O(1)
     private static boolean FindIfStringIsUniqueUsingIntegerBits(String word) {
         /*
-        1) We know that an int has 4bytes in memory 
+        1) We know that an int has 4bytes in memory (4 bytes = 32 bits)
+        2) we can use those bits to store 26 alphabets
+        Ex: if string contains 'a' then int = ..00001
         */
+        int storage=0;
+        int ascii_value;
+        for(int i=0;i<word.length();i++){
+            ascii_value = (int)word.charAt(i)-97;
+            if((storage&1<<ascii_value)==1){
+                return false;
+            }
+            storage |= 1<<ascii_value;
+        }        
         return true;
     }
-
+    //T.C =O(n) & S.C = O(n)
     private static boolean FindIfStringIsUniqueUsingHashMap(String word) {
         HashSet<Character> hash = new HashSet<>();
         for(int i=0;i<word.length();i++){
@@ -32,7 +43,7 @@ public class UniqueCharactersInString{
         }
         return true;
     }
-
+    //T.C =O(n*n) & S.C = O(1)
     private static boolean FindIfStringIsUniqueUsingBruteForce(String word) {
         //Compare every letter in the String with the right side of the String.
         //In worst case TC = O(n*2)
