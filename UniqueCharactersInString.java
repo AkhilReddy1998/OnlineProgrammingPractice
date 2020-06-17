@@ -23,13 +23,18 @@ public class UniqueCharactersInString{
         Ex: if string contains 'a' then int = ..00001
         */
         int storage=0;
-        int ascii_value;
+        int ascii_of_char;
         for(int i=0;i<word.length();i++){
-            ascii_value = (int)word.charAt(i)-97;
-            if((storage&1<<ascii_value)==1){
+            ascii_of_char = (int)word.charAt(i)-97;
+            if((storage & 1<<ascii_of_char)>1){/*This checks if the char already exists
+                Ex: Assume char ='a' , Now storage =0 & ascii_of_char = 0
+                1) Left Shift 1 to the position of ascii_of_char (Ex: if 'z' left shift 1 26 times)
+                2) Now we perform Logical(&)operation, it returns true only if 2 bits are(1)
+                3) So if we get a value greater than 1, then we have a duplicate character
+                */
                 return false;
             }
-            storage |= 1<<ascii_value;
+            storage |= 1<<ascii_of_char;//Now we initialize the bit to 1, because we need it for future char comparisions
         }        
         return true;
     }
