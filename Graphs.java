@@ -183,13 +183,13 @@ public class Graphs {
         for (var source : adjacencyList.keySet()) {
             var getConnections = adjacencyList.get(source);
             if (getConnections.size() > 0) {
-                System.out.println("Source is: " + source.label);
+                // System.out.println("Source is: " + source.label);
                 // visitedNodes.add(source.label);
                 for (int i = 0; i < getConnections.size(); i++) {
                     var to_node = getConnections.get(i);
-                    System.out.println("Child " + (i + 1) + " is: " + to_node.label);
+                    // System.out.println("Child " + (i + 1) + " is: " + to_node.label);
                     visitedNodes = traverseGraph(visitedNodes, to_node);
-                    System.out.println(visitedNodes);
+                    // System.out.println(visitedNodes);
                     if (visitedNodes.size() >= numberOfNodesInGraph - 1) {
                         System.out.println("Mother Node is: " + source.label);
                     }
@@ -197,7 +197,7 @@ public class Graphs {
                 }
             }
             visitedNodes.clear();
-            System.out.println("************************************************************");
+            // System.out.println("************************************************************");
         }
     }
 
@@ -205,10 +205,17 @@ public class Graphs {
         visitedNodes.add(node.label);
         var get_to_node_connections = adjacencyList.get(node);
         for (var to_node : get_to_node_connections) {
-            System.out.println("Child is: " + to_node.label);
+            // System.out.println("Child is: " + to_node.label);
             if (!visitedNodes.contains(to_node.label))
                 traverseGraph(visitedNodes, to_node);
         }
         return visitedNodes;
+    }
+
+    public void findMothernodeMethod2() {
+        boolean[] visitedNodes = new boolean[nodes.size()];
+        for (int i = 0; i < nodes.size(); i++) {
+            
+        }
     }
 }
